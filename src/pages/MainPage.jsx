@@ -22,7 +22,7 @@ const style = {
   count: `text-center mt-2`,
 };
 
-function MainPage() {
+function MainPage({ userId }) {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
 
@@ -30,7 +30,7 @@ function MainPage() {
   const createTodo = async (e) => {
     e.preventDefault();
 
-    await addDoc(collection(db, "todos"), {
+    await addDoc(collection(db, `${userId}`), {
       text: input,
       completed: false,
       creation_date: new Date(),
@@ -46,7 +46,7 @@ function MainPage() {
 
   //Lire un todo depuis firebase
   useEffect(() => {
-    const q = query(collection(db, "todos"));
+    const q = query(collection(db, `${userId}`));
     const unsubscribe = onSnapshot(q, (querySnapShot) => {
       let todoArray = [];
       querySnapShot.forEach((doc) => {
@@ -60,14 +60,14 @@ function MainPage() {
 
   //Update todo dans firebase
   const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), {
+    await updateDoc(doc(db, `${userId}`, todo.id), {
       completed: !todo.completed,
     });
   };
 
   //Supprimer un todo
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
+    await deleteDoc(doc(db, `${userId}`, id));
     console.log("Supprimer");
   };
 
