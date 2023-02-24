@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import ToolTip from "./ToolTip";
 const style = {
   li: `flex justify-between bg-slate-200 p-4 my-2 capitalize`,
   liComplete: `flex justify-between bg-slate-400 p-4 my-2 capitalize`,
@@ -26,7 +27,7 @@ function Todo({ todo, toggleComplete, deleteTodo }) {
         </p>
       </div>
       <button onClick={() => deleteTodo(todo.id)}>
-        <FaRegTrashAlt />{" "}
+        <ToolTip title="Supprimer" child={<FaRegTrashAlt />} />{" "}
       </button>
     </li>
   );

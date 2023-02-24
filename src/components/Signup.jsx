@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getError } from "./getError";
+
 const style = {
   form: ``,
   label: `font-bold mb-2 text-xl`,
@@ -7,20 +9,30 @@ const style = {
   input: `w-full rounded-md p-2 text-center text-2xl`,
   confirmContainer: `flex justify-center items-center bg-slate-500 cursor-pointer hover:opacity-90 rounded-md `,
   submitBtn: `text-center tracking-wider text-2xl p-2 font-bold text-gray-800 rounded-md text-white  `,
+  error: `text-center font-bold text-red-600 my-2 `,
 };
 
 function Signup({ setUser }) {
   const email = useRef();
   const password = useRef();
+  const [error, setError] = useState("");
 
   const onRegister = (e) => {
     e.preventDefault();
+
     const auth = getAuth();
     createUserWithEmailAndPassword(
       auth,
       email.current.value,
       password.current.value
-    ).then((userCredential) => setUser(userCredential.user));
+    )
+      .then((userCredential) => setUser(userCredential.user))
+      .catch((err) => {
+        setError(getError(err.code));
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+      });
   };
 
   return (
@@ -60,6 +72,7 @@ function Signup({ setUser }) {
           S'inscrire
         </button>
       </div>
+      <p className={style.error}> {error}</p>
     </form>
   );
 }
