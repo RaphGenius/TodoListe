@@ -1,7 +1,6 @@
 import React from "react";
 import { ImCross } from "react-icons/im";
 import { getAuth, signOut } from "firebase/auth";
-import ToolTip from "./ToolTip";
 
 function Logout({ setUser }) {
   const leaveApp = () => {

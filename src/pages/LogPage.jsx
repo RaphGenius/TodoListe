@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
+import { AnimatePresence, motion } from "framer-motion";
 
 function LogPage({ setUser }) {
   const [showPatern, setShowPatern] = useState("signup");
@@ -12,9 +13,19 @@ function LogPage({ setUser }) {
     formContainer: `bg-slate-200 p-2 rounded-xl w-full max-w-5xl `,
     title: `text-center text-3xl tracking-widest font-bold text-gray-800  `,
   };
-
+  const pageTransition = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+    },
+  };
   return (
-    <div className={style.container}>
+    <motion.div
+      variants={pageTransition}
+      initial="hidden"
+      animate="visible"
+      className={style.container}
+    >
       <h1 className={style.title}>TodoListe</h1>
       <div className={style.btnContainer}>
         {/* Bouton s'inscrire */}
@@ -43,14 +54,16 @@ function LogPage({ setUser }) {
           Se connecter
         </button>
       </div>
-      <div className={style.formContainer}>
-        {showPatern === "login" ? (
-          <Login setUser={setUser} />
-        ) : (
-          <Signup setUser={setUser} />
-        )}
-      </div>
-    </div>
+      <AnimatePresence mode="popLayout" initial={false}>
+        <div className={style.formContainer}>
+          {showPatern === "login" ? (
+            <Login setUser={setUser} showPatern={showPatern} />
+          ) : (
+            <Signup setUser={setUser} showPatern={showPatern} />
+          )}
+        </div>
+      </AnimatePresence>
+    </motion.div>
   );
 }
 

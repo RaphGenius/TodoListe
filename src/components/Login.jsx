@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { InfinitySpin } from "react-loader-spinner";
 import { getError } from "./getError";
+import { motion as m } from "framer-motion";
 const style = {
   form: ``,
   label: `font-bold mb-2 text-xl`,
@@ -12,15 +12,13 @@ const style = {
   error: `text-center font-bold text-red-600 my-2 `,
 };
 
-function Login({ setUser }) {
+function Login({ setUser, showPatern }) {
   const email = useRef();
   const password = useRef();
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const onLogin = (e) => {
     e.preventDefault();
-    setIsLoading(true);
     const auth = getAuth();
 
     signInWithEmailAndPassword(
@@ -29,7 +27,6 @@ function Login({ setUser }) {
       password.current.value
     )
       .then((userCredential) => setUser(userCredential.user))
-      .then(() => setIsLoading(false))
       .catch((err) => {
         setError(getError(err.code));
         setTimeout(() => {
@@ -43,7 +40,7 @@ function Login({ setUser }) {
       <div>
         <div className={style.inputContainer}>
           <label className={style.label} htmlFor="mail">
-            Adresse Mail
+            Adresse mail
           </label>
           <input
             ref={email}
@@ -71,9 +68,16 @@ function Login({ setUser }) {
         </div>
       </div>
       <div className={style.confirmContainer} style={{ background: "#A855F7" }}>
-        <button className={style.submitBtn} type="submit">
+        <m.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ x: 0, opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.4 }}
+          className={style.submitBtn}
+          type="submit"
+        >
           Se connecter
-        </button>
+        </m.button>
       </div>
       <p className={style.error}> {error}</p>
     </form>

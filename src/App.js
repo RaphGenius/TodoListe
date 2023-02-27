@@ -5,7 +5,7 @@ import LogPage from "./pages/LogPage";
 import Logout from "./components/Logout";
 
 const style = {
-  bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0] `,
+  bg: `min-h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0]   `,
 };
 
 function App() {

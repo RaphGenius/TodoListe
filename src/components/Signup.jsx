@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getError } from "./getError";
+import { motion as m } from "framer-motion";
 
 const style = {
-  form: ``,
+  form: `overflow-y-hidden`,
   label: `font-bold mb-2 text-xl`,
   inputContainer: `flex flex-col items-center py-2 `,
   input: `w-full rounded-md p-2 text-center text-2xl`,
@@ -68,9 +69,16 @@ function Signup({ setUser }) {
         </div>
       </div>
       <div className={style.confirmContainer} style={{ background: "#A855F7" }}>
-        <button className={style.submitBtn} type="submit">
+        <m.button
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ x: 0, opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.4 }}
+          className={style.submitBtn}
+          type="submit"
+        >
           S'inscrire
-        </button>
+        </m.button>
       </div>
       <p className={style.error}> {error}</p>
     </form>
