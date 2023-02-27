@@ -6,6 +6,8 @@ export function getError(code) {
     return "Cette adresse mail est déjà utilisée";
   } else if (code === "auth/wrong-password") {
     return "Le mot de passe indiqué est incorrecte";
+  } else if (code === "auth/user-not-found") {
+    return "Aucun utilisateur n'a été retrouvé avec cette adresse mail";
   } else {
     return "Attention, ne spam pas, tu vas tout casser! 😠 ";
   }
