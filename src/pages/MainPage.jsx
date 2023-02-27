@@ -14,13 +14,12 @@ import {
 import { db } from "../utils/firebase";
 
 const style = {
-  bg: `h-screen w-screen p-4 bg-gradient-to-r from-[#2F80ED] to-[#1CB5E0] `,
-  container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl p-4 mt-8 overflow-hidden `,
-  heading: `text-3xl font-bold text-center text-gray-800 p-2 `,
+  container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl p-4 mt-8 overflow-hidden dark:bg-gray-600 `,
+  heading: `text-3xl font-bold text-center text-gray-800 p-2 dark:text-slate-200  `,
   form: `flex justify-between`,
-  input: `border p-2 w-full text-xl`,
+  input: `border p-2 w-full text-xl `,
   button: `border p-4 ml-2 sm:mt-0 bg-purple-500 text-slate-100 hover:opacity-80 `,
-  count: `text-center mt-2`,
+  count: `text-center mt-2 text-fuchsia-800 dark:text-slate-200 font-bold`,
 };
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -90,30 +89,30 @@ function MainPage({ userId }) {
   };
 
   return (
-    <motion.div
-      variants={pageTransition}
-      initial="hidden"
-      animate="visible"
-      className={style.container}
-    >
-      <h3 className={style.heading}>Todo Liste</h3>
-      <form onSubmit={createTodo} className={style.form}>
-        <input
-          className={style.input}
-          type="text"
-          placeholder="Ajouter une tâche"
-          required
-          autoFocus
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <motion.button whileTap={{ scale: 0.95 }} className={style.button}>
-          <AiOutlinePlus size={30} />{" "}
-        </motion.button>
-      </form>
+    <AnimatePresence mode="sync">
+      <motion.div
+        variants={pageTransition}
+        initial="hidden"
+        animate="visible"
+        className={style.container}
+      >
+        <h3 className={style.heading}>Todo Liste</h3>
+        <form onSubmit={createTodo} className={style.form}>
+          <input
+            className={style.input}
+            type="text"
+            placeholder="Ajouter une tâche"
+            required
+            autoFocus
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <motion.button whileTap={{ scale: 0.95 }} className={style.button}>
+            <AiOutlinePlus size={30} />{" "}
+          </motion.button>
+        </form>
 
-      <motion.ul variants={container} initial="hidden" animate="visible">
-        <AnimatePresence>
+        <motion.ul variants={container} initial="hidden" animate="visible">
           {todos
             .sort((a, b) => b.creation_date - a.creation_date)
             .map((todo) => (
@@ -124,17 +123,17 @@ function MainPage({ userId }) {
                 deleteTodo={deleteTodo}
               />
             ))}
-        </AnimatePresence>
-      </motion.ul>
+        </motion.ul>
 
-      <p className={style.count}>
-        {todos.length === 0
-          ? ""
-          : `Il vous reste ${todosLeft()} ${
-              todosLeft() > 1 ? "tâches" : "tâche"
-            } à finaliser `}
-      </p>
-    </motion.div>
+        <p className={style.count}>
+          {todos.length === 0
+            ? ""
+            : `Il vous reste ${todosLeft()} ${
+                todosLeft() > 1 ? "tâches" : "tâche"
+              } à finaliser `}
+        </p>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

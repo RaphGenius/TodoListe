@@ -7,11 +7,11 @@ function LogPage({ setUser }) {
   const [showPatern, setShowPatern] = useState("signup");
 
   const style = {
-    container: `flex flex-col  justify-center gap-5 items-center w-full  `,
+    container: `flex flex-col  justify-center gap-5 items-center w-full    `,
     btnContainer: `flex my-4 gap-5`,
-    btn: ` w-32 border-2 border-500 p-2 font-bold text-gray-800 rounded-md  `,
-    formContainer: `bg-slate-200 p-2 rounded-xl w-full max-w-5xl `,
-    title: `text-center text-3xl tracking-widest font-bold text-gray-800  `,
+    btn: ` w-32 border-2 border-500 p-2 font-bold text-gray-800 rounded-md  dark:text-slate-200  `,
+    formContainer: `bg-slate-200 p-2 rounded-xl w-full max-w-5xl dark:bg-slate-800  `,
+    title: `text-center text-3xl tracking-widest font-bold text-gray-800 dark:text-slate-200  `,
   };
   const pageTransition = {
     hidden: { opacity: 0 },

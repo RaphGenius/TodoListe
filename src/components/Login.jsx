@@ -3,15 +3,14 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getError } from "./getError";
 import { motion as m } from "framer-motion";
 const style = {
-  form: ``,
-  label: `font-bold mb-2 text-xl`,
-  inputContainer: `flex flex-col items-center py-2 `,
-  input: `w-full rounded-md p-2 text-center text-2xl`,
-  confirmContainer: `flex justify-center items-center bg-slate-500 cursor-pointer hover:opacity-90 rounded-md `,
-  submitBtn: `text-center tracking-wider text-2xl p-2 font-bold text-gray-800 rounded-md text-white  `,
+  form: `overflow-y-hidden    `,
+  label: `font-bold mb-2 text-xl dark:text-slate-200 `,
+  inputContainer: `flex flex-col items-center py-2  `,
+  input: `w-full rounded-md p-2 text-center text-2xl  dark:bg-slate-400  `,
+  confirmContainer: `flex justify-center items-center bg-slate-500 cursor-pointer hover:opacity-90 rounded-md  `,
+  submitBtn: `text-center tracking-wider text-2xl p-2 font-bold text-gray-800 rounded-md text-white  dark:text-black  `,
   error: `text-center font-bold text-red-600 my-2 `,
 };
-
 function Login({ setUser, showPatern }) {
   const email = useRef();
   const password = useRef();

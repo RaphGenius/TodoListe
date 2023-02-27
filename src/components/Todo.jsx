@@ -47,7 +47,7 @@ function Todo({ todo, toggleComplete, deleteTodo }) {
         </p>
       </div>
       <button onClick={() => deleteTodo(todo.id)}>
-        <ToolTip title="Supprimer" child={<FaRegTrashAlt />} />
+        <FaRegTrashAlt />
       </button>
     </motion.li>
   );
